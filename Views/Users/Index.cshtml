@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Perfumeshop.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 align="center">Users</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src="~/pictures/@item.ProfilePicture"
+                class="rounded-circle"
+                height="50" width="50"
+                asp-append-version="true" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                | <a asp-controller="Orders" asp-action="Orders" asp-route-id="@item.Id">Orders</a>
+
+                | <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

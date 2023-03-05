@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Perfumeshop.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 align="center">@ViewBag.User Orders</h1>
+@if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+{
+<p>
+    <a asp-controller="Users" asp-action="OrderMorePerfumes" asp-route-id="@ViewBag.UserId">Make an order</a>
+</p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Perfume)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Perfume.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-controller="Perfumes" asp-action="Details" asp-route-id="@item.PerfumeId">
+                @Html.DisplayFor(modelItem => item.Perfume.Name)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Perfume.Price)
+            </td>
+            <td>
+                |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    @if (item.Status == "Pending Approval")
+                    {
+                        <span>|</span>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,26 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+.pom {
+    text-align: center;
+    color: black;
+    background-image: url("../pictures/back1.jpg");
+    background-size: cover;
+    height: 100vh;
+    margin-top: 0px;
+}

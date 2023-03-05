@@ -1,0 +1,67 @@
+﻿@model  Perfumeshop.ViewModels.PerfumePicture
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Perfumes</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="perfume.Id" />
+             <div class="form-group">
+                <label asp-for="pictureFile" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="pictureFile" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile"></label>
+                </div>
+                <span asp-validation-for="pictureFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="perfume.Name" class="control-label"></label>
+                <input asp-for="perfume.Name" class="form-control" />
+                <span asp-validation-for="perfume.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="perfume.Category" class="control-label"></label>
+                <input asp-for="perfume.Category" class="form-control" />
+                <span asp-validation-for="perfume.Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="perfume.Size" class="control-label"></label>
+                <input asp-for="perfume.Size" class="form-control" />
+                <span asp-validation-for="perfume.Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="perfume.Price" class="control-label"></label>
+                <input asp-for="perfume.Price" class="form-control" />
+                <span asp-validation-for="perfume.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="perfume.Description" class="control-label"></label>
+                <input asp-for="perfume.Description" class="form-control" />
+                <span asp-validation-for="perfume.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="perfume.BrandId" class="control-label"></label>
+                <select asp-for="perfume.BrandId" class="form-control" asp-items="ViewBag.BrandId"></select>
+                <span asp-validation-for="perfume.BrandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,52 @@
+﻿@model Perfumeshop.ViewModels.UserEditPicture
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row">
+        <dl class="col-sm-6">
+
+            <img src="~/pictures/@Model.user.ProfilePicture"
+            width=30%
+                asp-append-version="true" />
+
+        </dl>
+        <dl class="col-sm-6">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.user.FirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.user.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.user.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.user.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            Email Address
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.Email
+        </dd>
+        </dl>
+    </dl>
+</div>
+<div>@if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.user.Id">Edit</a>
+        <span>|</span>
+        <a asp-controller="Home" asp-action="Index">Back to List</a>
+    }
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <a asp-action="Index">Back to List</a>
+    }
+</div>

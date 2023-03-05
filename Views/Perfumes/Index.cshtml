@@ -1,0 +1,49 @@
+﻿@using Perfumeshop.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@model Perfumeshop.ViewModels.PerfumesFilterVM
+@inject UserManager<PerfumeshopUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 align="center">Perfumes</h1>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+<p>
+    <a asp-action="Create">Add a Perfume</a>
+</p>
+    }
+<form asp-controller="Perfumes" asp-action="Index" method="get">
+<p>
+<select asp-for="perfumeCategory" asp-items="Model.Categories">
+<option value="">Select Category</option>
+</select>
+<select asp-for="perfumeBrand" asp-items="Model.Brands">
+<option value="">All</option>
+</select>
+Title: <input type="text" asp-for="SearchString" />
+<input type="submit" value="Filter" />
+</p>
+</form>
+<div class="container">
+    <div class="row">
+@foreach(var item in Model.perfumes){
+        <div class="col-4 d-flex justify-content-center my-5">
+ <div class="card d-flex flex-wrap text-center text-white bg-dark mb-3" style="width: 18rem;">
+  <img class="card-img-top" src="@Url.Content(item.Picture)" heigth="100" width="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+    <span class="card-text">@Html.DisplayFor(modelItem => item.Category)</span><br/>
+    <span class="card-text">Brand: <b>@Html.DisplayFor(modelItem => item.Brand.Name)</b></span> <br/>
+    <span class="card-text"><b>@Html.DisplayFor(modelItem => item.Price)</b></span>
+    <a asp-action="Details" asp-route-id="@item.Id" class="d-flex justify-content-center btn btn-outline-light my-1">Details</a>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                        {
+                            <a asp-controller="Users" asp-action="OrderAPerfume" asp-route-id="@item.Id" class="d-flex justify-content-center btn btn-outline-light">Buy</a>
+                        }
+  </div>
+</div>
+</div>
+}
+</div>
+</div>
